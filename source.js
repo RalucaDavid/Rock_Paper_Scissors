@@ -1,3 +1,6 @@
+let numberWinsPlayer = 0;
+let numberWinsComputer = 0;
+
 function getRandomNumber()
 {
     return Math.floor(Math.random()*3);
@@ -15,7 +18,6 @@ function getComputerChoice()
 
 function round(playerSelection, computerSelection)
 {
-    playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
     if(playerSelection=="Rock")
     {
         if(computerSelection=="Paper")
@@ -42,57 +44,55 @@ function round(playerSelection, computerSelection)
     }
 }
 
-function calculateScore(result,numberWinsPlayer, numberWinsComputer)
+function calculateScore(result)
 {
     if(result=="Computer wins")
         numberWinsComputer++;
     else if(result=="Player wins")
         numberWinsPlayer++;
-    return [numberWinsPlayer, numberWinsComputer];
 }
 
-function verifyPlayerChoice(playerChoice)
+function finalResult()
 {
-    playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase();
-    while((playerChoice!="Rock")&&(playerChoice!="Paper")&&(playerChoice!="Scissors"))
-    {
-        playerChoice = prompt("The current choice is incorrect. Make another choice for the game:");
-        playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase();
-    }
-    return playerChoice;
+   if(numberWinsComputer==5)
+     return "The Computer won!"
+  else if(numberWinsPlayer==5)
+     return "The Player won!"
+  return "";
 }
 
-function showRoundData(playerChoice,numberWinsPlayer,computerChoice,numberWinsComputer)
+function showRoundData(playerChoice,computerChoice)
 {
+    const result = document.querySelector('#result');
     player = "The player chose:" + playerChoice;
-    console.log(player);
     computer = "The computer chose:" + computerChoice;
-    console.log(computer);
     scoreStatus = "The score is: " + numberWinsPlayer + "-" + numberWinsComputer;
-    console.log(scoreStatus);
+    final = finalResult();
+    result.innerHTML = player + "<br>" + computer + "<br>" + scoreStatus + "<br>" + final;
+    result.style.margin = '10px';
+}
+
+function playRound(playerChoice)
+{
+  const computerChoice = getComputerChoice();
+  const result = round(playerChoice, computerChoice);
+  calculateScore(result);
+  showRoundData(playerChoice,computerChoice);
 }
 
 function playGame()
 {
-   numberWinsPlayer = 0;
-   numberWinsComputer = 0;
-   for(let index=1;index<=5; index++)
-   {
-        playerChoice = prompt("Make a choice for the game:");
-        playerChoice = verifyPlayerChoice(playerChoice);
-        computerChoice = getComputerChoice();
-        result = round(playerChoice,computerChoice);
-        updatedScores = calculateScore(result,numberWinsPlayer,numberWinsComputer);
-        numberWinsPlayer = updatedScores[0];
-        numberWinsComputer = updatedScores[1];
-        showRoundData(playerChoice,numberWinsPlayer,computerChoice,numberWinsComputer);
-   }
-   if(numberWinsComputer>numberWinsPlayer)
-        console.log("The computer won.");
-   else if(numberWinsPlayer>numberWinsComputer)
-        console.log("The player won.");
-   else 
-        console.log("Equality");
+  const buttonRock = document.querySelector('#Rock');
+  const buttonPaper = document.querySelector('#Paper');
+  const buttonScissors= document.querySelector('#Scissors');
+   buttonRock.onclick = function() {
+    playRound('Rock');
+   };
+   buttonPaper.onclick = function() {
+    playRound('Paper')
+   };
+   buttonScissors.onclick = function() {
+    playRound('Scissors');
+  };
 }
-
 playGame();
