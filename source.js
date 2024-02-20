@@ -1,6 +1,10 @@
 let numberWinsPlayer = 0;
 let numberWinsComputer = 0;
 
+const buttonRock = document.querySelector('#Rock');
+const buttonPaper = document.querySelector('#Paper');
+const buttonScissors= document.querySelector('#Scissors');
+
 function getRandomNumber()
 {
     return Math.floor(Math.random()*3);
@@ -54,10 +58,20 @@ function calculateScore(result)
 
 function finalResult()
 {
-   if(numberWinsComputer==5)
+  if(numberWinsComputer==5)
+   {
+     buttonRock.disabled = true;
+     buttonPaper.disabled = true;
+     buttonScissors.disabled = true;
      return "The Computer won!"
+   }
   else if(numberWinsPlayer==5)
+  {
+     buttonRock.disabled = true;
+     buttonPaper.disabled = true;
+     buttonScissors.disabled = true;
      return "The Player won!"
+  }
   return "";
 }
 
@@ -82,9 +96,6 @@ function playRound(playerChoice)
 
 function playGame()
 {
-  const buttonRock = document.querySelector('#Rock');
-  const buttonPaper = document.querySelector('#Paper');
-  const buttonScissors= document.querySelector('#Scissors');
    buttonRock.onclick = function() {
     playRound('Rock');
    };
