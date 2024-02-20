@@ -7,7 +7,10 @@ The appearance of the project: \
 
 ![image](https://github.com/RalucaDavid/Rock_Paper_Scissors/assets/117584603/e038dc58-3c3c-4d87-b34d-d88a712dd1f6)
 
-![image](https://github.com/RalucaDavid/Rock_Paper_Scissors/assets/117584603/310fe76b-251b-4f6a-892e-2ad025cbfcff)
+![image](https://github.com/RalucaDavid/Rock_Paper_Scissors/assets/117584603/6c1080bb-127b-47c3-b363-aacf34fa0fdb)
+
+
+
 
 
 
